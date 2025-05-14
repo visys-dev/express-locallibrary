@@ -1,5 +1,6 @@
 const Author = require("../models/author");
 const Book = require('../models/book');
+const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 
 // Display list of all Authors.
@@ -36,16 +37,68 @@ exports.author_detail = asyncHandler(async (req, res, next) => {
   });
 });
 
-  
-  // Display Author create form on GET.
-  exports.author_create_get = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Author create GET");
-  });
-  
-  // Handle Author create on POST.
-  exports.author_create_post = asyncHandler(async (req, res, next) => {
-    res.send("NOT IMPLEMENTED: Author create POST");
-  });
+
+// Відображення форми створення автора при GET-запиті.
+exports.author_create_get = (req, res, next) => {
+  res.render("author_form", { title: "Створити автора" });
+};
+
+exports.author_create_post = [
+  // Валідація та очищення полів.
+  body("first_name")
+      .trim()
+      .isLength({ min: 1 })
+      .escape()
+      .withMessage("Ім'я повинно бути вказано.")
+      .isAlphanumeric()
+      .withMessage("Ім'я містить неалфанумерні символи."),
+  body("family_name")
+      .trim()
+      .isLength({ min: 1 })
+      .escape()
+      .withMessage("Прізвище повинно бути вказано.")
+      .isAlphanumeric()
+      .withMessage("Прізвище містить неалфанумерні символи."),
+  body("date_of_birth", "Недійсна дата народження")
+      .optional({ values: "falsy" })
+      .isISO8601()
+      .toDate(),
+  body("date_of_death", "Недійсна дата смерті")
+      .optional({ values: "falsy" })
+      .isISO8601()
+      .toDate(),
+
+  // Обробка запиту після валідації та очищення.
+  asyncHandler(async (req, res, next) => {
+    // Витягнення помилок валідації з запиту.
+    const errors = validationResult(req);
+
+    // Створення об'єкта автора з екранованими та обрізаними даними
+    const author = new Author({
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      date_of_birth: req.body.date_of_birth,
+      date_of_death: req.body.date_of_death,
+    });
+
+    if (!errors.isEmpty()) {
+      // Є помилки. Відображення форми знову з очищеними значеннями та повідомленнями про помилки.
+      res.render("author_form", {
+        title: "Створити автора",
+        author: author,
+        errors: errors.array(),
+      });
+      return;
+    } else {
+      // Дані з форми є дійсними.
+
+      // Збереження автора.
+      await author.save();
+      // Перенаправлення на сторінку нового запису автора.
+      res.redirect(author.url);
+    }
+  }),
+];
   
   // Display Author delete form on GET.
   exports.author_delete_get = asyncHandler(async (req, res, next) => {
