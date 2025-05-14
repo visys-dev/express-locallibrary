@@ -1,6 +1,7 @@
 const Genre = require("../models/genre");
 const Book = require("../models/book");
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 
 
 // Display list of all Genres.
@@ -35,15 +36,52 @@ exports.genre_detail = asyncHandler(async (req, res, next) => {
   });
 });
 
-// Display Genre create form on GET.
-exports.genre_create_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre create GET");
-});
+// Відображення форми створення жанру на GET.
+exports.genre_create_get = (req, res, next) => {
+  res.render("genre_form", { title: "Створити жанр" });
+};
 
-// Handle Genre create on POST.
-exports.genre_create_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre create POST");
-});
+// POST: Створити новий жанр
+exports.genre_create_post = [
+  // 1) Валідація та санація поля name
+  body('name', 'Назва жанру повинна містити мінімум 3 символи')
+      .trim()
+      .isLength({ min: 3 })
+      .escape(),
+
+  // 2) Обробка запиту після валідації
+  asyncHandler(async (req, res, next) => {
+    // Отримуємо результати валідації
+    const errors = validationResult(req);
+
+    // Створюємо об’єкт жанру для повторного рендеру форми при помилках
+    const genre = new Genre({ name: req.body.name });
+
+    if (!errors.isEmpty()) {
+      // Є помилки валідації — рендеримо форму з помилками
+      res.render('genre_form', {
+        title: 'Створити жанр',
+        genre,
+        errors: errors.array(),
+      });
+      return;
+    }
+
+    // 3) Перевірка, чи такий жанр уже є в БД (без врахування регістру)
+    const found = await Genre.findOne({ name: req.body.name })
+        .collation({ locale: 'en', strength: 2 })
+        .exec();
+
+    if (found) {
+      // Жанр уже існує — перенаправляємо на його сторінку
+      res.redirect(found.url);
+    } else {
+      // Новий жанр — зберігаємо в БД та перенаправляємо
+      await genre.save();
+      res.redirect(genre.url);
+    }
+  }),
+];
 
 // Display Genre delete form on GET.
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {

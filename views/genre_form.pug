@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+    h1= title
+
+    form(method='POST', action='')
+        .form-group
+            label(for='name') Назва жанру:
+            input#name.form-control(type='text', name='name', value=(genre && genre.name) ? genre.name : '')
+
+        button.btn.btn-primary(type='submit') Створити
+
+    //- Відображення помилок, якщо вони є
+    if errors
+        .alert.alert-danger
+            ul
+                each error in errors
+                    li= error.msg
