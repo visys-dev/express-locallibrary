@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1= title
+  if bookinstance_list.length
+    ul
+      each inst in bookinstance_list
+        li
+          a(href=inst.url) #{inst.book.title}
+          |  — 
+          span(
+            class=
+              inst.status == 'Available' ? 'text-success' :
+              inst.status == 'Maintenance' ? 'text-danger' : 'text-warning'
+          ) #{inst.status}
+          if inst.status != 'Available'
+            span  (Due: #{inst.due_back_formatted})
+  else
+    p Немає екземплярів книг.

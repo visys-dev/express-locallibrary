@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Ласкаво просимо до #[em LocalLibrary] — простого сайту бібліотеки, розробленого як навчальний приклад на Mozilla Developer Network.
+
+  h2 Динамічний вміст
+
+  p У бібліотеці наразі зберігаються наступні записи:
+
+  ul
+    li #[strong Книг:] !{book_count}
+    li #[strong Копій:] !{book_instance_count}
+    li #[strong Доступних копій:] !{book_instance_available_count}
+    li #[strong Авторів:] !{author_count}
+    li #[strong Жанрів:] !{genre_count}
