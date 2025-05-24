@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a5d17e6-488f-4a91-a9df-0bebbf7cc284" name="Changes" comment="Практична №14 -- done">
-      <change afterPath="$PROJECT_DIR$/views/author_delete.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/book_delete.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/bookinstance_delete.pug" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/genre_delete.pug" afterDir="false" />
+    <list default="true" id="4a5d17e6-488f-4a91-a9df-0bebbf7cc284" name="Changes" comment="Практична №16 -- done">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/authorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authorController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/bookController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bookController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/bookinstanceController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bookinstanceController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/genreController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/genreController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/author_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/author_detail.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/author_form.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/author_form.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/book_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/book_detail.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bookinstance_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/bookinstance_detail.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/bookinstance_form.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/bookinstance_form.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/genre_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/genre_detail.pug" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/genre_form.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/genre_form.pug" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.js" beforeDir="false" afterPath="$PROJECT_DIR$/db.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,7 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1747241675314</updated>
       <workItem from="1747241676395" duration="3425000" />
-      <workItem from="1748077205309" duration="12247000" />
+      <workItem from="1748077205309" duration="14269000" />
     </task>
     <task id="LOCAL-00001" summary="Практична №12">
       <option name="closed" value="true" />
@@ -136,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748082265090</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Практична №16 -- done">
+      <option name="closed" value="true" />
+      <created>1748110441908</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748110441908</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,6 +157,7 @@
     <MESSAGE value="Практична №13.1" />
     <MESSAGE value="Практична №13 -- done" />
     <MESSAGE value="Практична №14 -- done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Практична №14 -- done" />
+    <MESSAGE value="Практична №16 -- done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Практична №16 -- done" />
   </component>
 </project>
