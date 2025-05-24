@@ -3,16 +3,42 @@ extends layout.pug
 block content
     h1= title
 
-    form(method='POST', action='')
-        .form-group
-            label(for='name') Назва жанру:
-            input#name.form-control(type='text', name='name', value=(genre && genre.name) ? genre.name : '')
-
-        button.btn.btn-primary(type='submit') Створити
-
-    //- Відображення помилок, якщо вони є
+    //— Глобальні повідомлення про помилки —
     if errors
         .alert.alert-danger
             ul
-                each error in errors
-                    li= error.msg
+                each err in errors
+                    li= err.msg
+
+    //— Форма створення/редагування жанру —
+    form(
+        method='POST',
+        action= genre && genre._id
+            ? (genre.url + '/update')
+        : '/catalog/genre/create'
+    )
+        //— Прихований _id для оновлення —
+        if genre && genre._id
+            input(type='hidden', name='_id', value=genre._id)
+
+        //— Назва жанру —
+        - const errName = errors && errors.find(e => e.param==='name')
+        .form-group
+            label(for='name') Назва жанру:
+            input#name.form-control(
+                type='text',
+                name='name',
+                required,
+                value=(genre && genre.name) ? genre.name : '',
+                class= errName ? 'is-invalid' : ''
+            )
+            if errName
+                .invalid-feedback= errName.msg
+
+        //— Кнопки дії —
+        .form-actions(style='margin-top:20px;')
+            button.btn.btn-primary(type='submit') Зберегти
+            a.btn.btn-secondary(
+                href= genre && genre._id ? genre.url : '/catalog/genres',
+                style='margin-left:10px;'
+            ) Скасувати

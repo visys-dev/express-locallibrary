@@ -1,0 +1,19 @@
+extends layout
+
+block content
+    h1 #{title}: #{genre.name}
+
+    if books.length
+        p #[strong Спочатку видаліть книги з цього жанру:]
+        ul
+            each b in books
+                li a(href=b.url)= b.title
+    else
+        p Ви дійсно бажаєте видалити цей жанр?
+
+    form(method='POST')
+        input(type='hidden', name='genreid', value=genre._id)
+        button.btn.btn-danger(type='submit') Видалити
+    hr
+    p
+        a.btn.btn-secondary(href=genre.url) Скасувати

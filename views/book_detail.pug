@@ -31,4 +31,5 @@ block content
                 a(href=val.url) #{val._id}
 
         else
-            p У бібліотеці немає копій цієї книги.
+            p У бібліотеці немає копій цієї книги.+
+        a.btn.btn-danger(href=book.url + '/delete', style='margin-top:15px;') Видалити книгу

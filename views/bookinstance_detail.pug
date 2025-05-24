@@ -20,3 +20,14 @@ block content
 
         dt Ідентифікатор:
         dd= bookinstance._id
+
+    hr
+    p
+        a.btn.btn-danger(
+            href=bookinstance.url + '/delete'
+            style='margin-top:15px;'
+        ) Видалити екземпляр
+        a.btn.btn-secondary(
+            href=bookinstance.url + '/update', style='margin-top:15px;'
+            ) Редагувати екземпляр
+

@@ -150,15 +150,42 @@ exports.book_create_post = [
   }),
 ];
 
-// Display book delete form on GET.
+
 exports.book_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Book delete GET");
+  const [book, book_instances] = await Promise.all([
+    Book.findById(req.params.id).exec(),
+    BookInstance.find({ book: req.params.id }).exec(),
+  ]);
+  if (!book) {
+    return res.redirect('/catalog/books');
+  }
+  res.render('book_delete', {
+    title: 'Видалити книгу',
+    book,
+    book_instances,
+  });
 });
 
-// Handle book delete on POST.
+
+// POST /catalog/book/:id/delete
 exports.book_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Book delete POST");
+  const [book, book_instances] = await Promise.all([
+    Book.findById(req.params.id).exec(),
+    BookInstance.find({ book: req.params.id }).exec(),
+  ]);
+  if (book_instances.length > 0) {
+    // є екземпляри — показати форму з переліком
+    return res.render('book_delete', {
+      title: 'Видалити книгу',
+      book,
+      book_instances,
+    });
+  }
+  // видалити книгу
+  await Book.findByIdAndDelete(req.body.bookid);
+  res.redirect('/catalog/books');
 });
+
 
 // Display book update form on GET.
 exports.book_update_get = asyncHandler(async (req, res, next) => {

@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 #{title}: #{instance.book.title}
+
+    dl
+        dt ISBN
+        dd= instance.imprint
+
+        dt Статус
+        dd= instance.status
+
+        //- Додаємо умовний рендеринг для дати повернення
+        if instance.due_back
+            dt Повернути до
+            dd= instance.due_back.toDateString()
+
+    p Ви дійсно бажаєте видалити цей екземпляр?
+
+    form(method='POST')
+        input(type='hidden', name='instanceid', value=instance._id)
+        button.btn.btn-danger(type='submit') Видалити
+    hr
+    p
+        a.btn.btn-secondary(href=instance.url) Скасувати

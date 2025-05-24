@@ -14,3 +14,7 @@ block content
                     dd #{book.summary}
         else
             p У цього жанру немає книг.
+
+        a.btn.btn-danger(href=genre.url + '/delete', style='margin-top:15px;') Видалити жанр
+        a.btn.btn-secondary(href=genre.url + '/update', style='margin-top:15px;') Редагувати жанр
+

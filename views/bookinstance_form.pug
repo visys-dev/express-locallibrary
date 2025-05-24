@@ -1,28 +1,44 @@
 extends layout
 
 block content
-    h1 Створити екземпляр книги
+    h1= bookinstance && bookinstance._id ? 'Редагувати екземпляр' : 'Створити екземпляр книги'
 
     if errors
         ul.text-danger
             each error in errors
                 li= error.msg
 
-    form(method='POST')
+    //- Якщо оновлення — відправка на /:id/update, інакше — просто POST на /create
+    form(
+        method='POST',
+        action= bookinstance && bookinstance._id
+            ? (bookinstance.url + '/update')
+        : ''
+    )
+        //- Прихований _id для оновлення
+        if bookinstance && bookinstance._id
+            input(type='hidden', name='_id', value=bookinstance._id)
+
         .form-group
             label(for='book') Книга:
             select#book.form-control(name='book' required)
                 option(value='') -- Будь ласка, виберіть книгу --
                 each book in book_list
-                    if typeof selected_book !== 'undefined' && book._id.toString() === selected_book.toString()
+                    if bookinstance && bookinstance.book.toString() === book._id.toString()
                         option(value=book._id selected)= book.title
                     else
                         option(value=book._id)= book.title
 
         .form-group
             label(for='imprint') Видавництво:
-            input#imprint.form-control(type='text', name='imprint', required, value= bookinstance && bookinstance.imprint ?
-                bookinstance.imprint : '')
+            input#imprint.form-control(
+                type='text',
+                name='imprint',
+                required,
+                value= bookinstance && bookinstance.imprint
+                    ? bookinstance.imprint
+                : ''
+            )
 
         .form-group
             label(for='status') Статус:
@@ -35,7 +51,12 @@ block content
 
         .form-group
             label(for='due_back') Дата повернення:
-            input#due_back.form-control(type='date', name='due_back', value= bookinstance && bookinstance.due_back ?
-                bookinstance.due_back.toISOString().substring(0,10) : '')
+            input#due_back.form-control(
+                type='date',
+                name='due_back',
+                value= bookinstance && bookinstance.due_back
+                    ? bookinstance.due_back.toISOString().substring(0,10)
+                : ''
+            )
 
         button.btn.btn-primary(type='submit') Зберегти

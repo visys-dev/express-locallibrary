@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    h1 #{title}: #{book.title}
+    p Автор: #[a(href=book.author.url)= book.author.name]
+
+    if book_instances.length
+        p #[strong Спочатку видаліть екземпляри цієї книги:]
+        ul
+            each inst in book_instances
+                li
+                    a(href=inst.url)= inst.imprint + ' (' + inst.status + ')'
+    else
+        p Ви дійсно бажаєте видалити цю книгу?
+
+    form(method='POST')
+        input(type='hidden', name='bookid', value=book._id)
+        button.btn.btn-danger(type='submit') Видалити
+    hr
+    p
+        a.btn.btn-secondary(href=book.url) Скасувати

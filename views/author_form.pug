@@ -1,24 +1,77 @@
 extends layout
 
 block content
-    h1=title
+    h1= title
 
-    form(method='POST')
-        div.form-group
-            label(for='first_name') Ім'я:
-            input#first_name.form-control(type='text', placeholder='Ім\'я'
-                name='first_name' required value=(undefined===author ? '' : author.first_name) )
-            label(for='family_name') Прізвище:
-            input#family_name.form-control(type='text', placeholder='Прізвище' name='family_name' required value=(undefined===author ? '' : author.family_name))
-        div.form-group
-            label(for='date_of_birth') Дата народження:
-            input#date_of_birth.form-control(type='date' name='date_of_birth' value=(undefined===author ? '' : author.date_of_birth) )
-        div.form-group
-            label(for='date_of_death') Дата смерті:
-            input#date_of_birth.form-control(type='date' name='date_of_death' value=(undefined===author ? '' : author.date_of_death) )
-        button.btn.btn-primary(type='submit') Зберегти
-
+    //— глобальні помилки —
     if errors
-        ul
-            for error in errors
-                li!= error.msg
+        .alert.alert-danger
+            ul
+                each err in errors
+                    li= err.msg
+
+    form(method='POST', action=author && author._id ? author.url + '/update' : '/catalog/author/create')
+        //— прихований _id для оновлення —
+        if author && author._id
+            input(type='hidden', name='_id', value=author._id)
+
+        //— Ім'я —
+        - const errFirst = errors && errors.find(e => e.param==='first_name')
+        .form-group
+            label(for='first_name') Ім'я:
+            input#first_name.form-control(
+                type='text',
+                name='first_name',
+                required,
+                placeholder="Ім'я",
+                value=(author ? author.first_name : ''),
+                class= errFirst ? 'is-invalid' : ''
+            )
+            if errFirst
+                .invalid-feedback= errFirst.msg
+
+        //— Прізвище —
+        - const errLast = errors && errors.find(e => e.param==='family_name')
+        .form-group
+            label(for='family_name') Прізвище:
+            input#family_name.form-control(
+                type='text',
+                name='family_name',
+                required,
+                placeholder='Прізвище',
+                value=(author ? author.family_name : ''),
+                class= errLast ? 'is-invalid' : ''
+            )
+            if errLast
+                .invalid-feedback= errLast.msg
+
+        //— Дата народження —
+        - const errDob = errors && errors.find(e => e.param==='date_of_birth')
+        .form-group
+            label(for='date_of_birth') Дата народження:
+            input#date_of_birth.form-control(
+                type='date',
+                name='date_of_birth',
+                value=(author && author.date_of_birth ? author.date_of_birth.toISOString().substring(0,10) : ''),
+                class= errDob ? 'is-invalid' : ''
+            )
+            if errDob
+                .invalid-feedback= errDob.msg
+
+        //— Дата смерті —
+        - const errDod = errors && errors.find(e => e.param==='date_of_death')
+        .form-group
+            label(for='date_of_death') Дата смерті:
+            input#date_of_death.form-control(
+                type='date',
+                name='date_of_death',
+                value=(author && author.date_of_death ? author.date_of_death.toISOString().substring(0,10) : ''),
+                class= errDod ? 'is-invalid' : ''
+            )
+            if errDod
+                .invalid-feedback= errDod.msg
+
+        .form-actions(style='margin-top:20px;')
+            button.btn.btn-primary(type='submit') Зберегти
+            a.btn.btn-secondary(href= author && author._id ? author.url : '/catalog/authors',
+                style='margin-left:10px;') Скасувати

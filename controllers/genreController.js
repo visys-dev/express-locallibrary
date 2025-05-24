@@ -85,20 +85,51 @@ exports.genre_create_post = [
 
 // Display Genre delete form on GET.
 exports.genre_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre delete GET");
+  const [genre, books] = await Promise.all([
+    Genre.findById(req.params.id).exec(),
+    Book.find({ genre: req.params.id }).exec(),
+  ]);
+  if (!genre) {
+    return res.redirect('/catalog/genres');
+  }
+  res.render('genre_delete', { title: 'Видалити жанр', genre, books });
 });
 
-// Handle Genre delete on POST.
+// POST /catalog/genre/:id/delete
 exports.genre_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre delete POST");
+  const [genre, books] = await Promise.all([
+    Genre.findById(req.params.id).exec(),
+    Book.find({ genre: req.params.id }).exec(),
+  ]);
+  if (books.length > 0) {
+    return res.render('genre_delete', { title: 'Видалити жанр', genre, books });
+  }
+  await Genre.findByIdAndDelete(req.body.genreid);
+  res.redirect('/catalog/genres');
 });
 
 // Display Genre update form on GET.
 exports.genre_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre update GET");
+  const genre = await Genre.findById(req.params.id);
+  if (!genre) {
+    return res.redirect('/catalog/genres');
+  }
+  res.render('genre_form', { title: 'Редагувати жанр', genre });
 });
 
 // Handle Genre update on POST.
-exports.genre_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: Genre update POST");
-});
+exports.genre_update_post = [
+  asyncHandler(async (req, res, next) => {
+    const gen = new Genre({ name: req.body.name, _id: req.params.id });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render('genre_form', {
+        title: 'Редагувати жанр',
+        genre: gen,
+        errors: errors.array(),
+      });
+    }
+    await Genre.findByIdAndUpdate(req.params.id, gen);
+    res.redirect(gen.url);
+  })
+];

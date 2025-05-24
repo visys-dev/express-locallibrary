@@ -96,22 +96,62 @@ exports.bookinstance_create_post = [
 ];
 
 
-// Display BookInstance delete form on GET.
+// GET /catalog/bookinstance/:id/delete
 exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance delete GET");
+  const instance = await BookInstance.findById(req.params.id).populate('book').exec();
+  if (!instance) {
+    return res.redirect('/catalog/bookinstances');
+  }
+  res.render('bookinstance_delete', {
+    title: 'Видалити екземпляр',
+    instance,
+  });
 });
 
-// Handle BookInstance delete on POST.
+// POST /catalog/bookinstance/:id/delete
 exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance delete POST");
+  await BookInstance.findByIdAndDelete(req.body.instanceid);
+  res.redirect('/catalog/bookinstances');
 });
 
 // Display BookInstance update form on GET.
 exports.bookinstance_update_get = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance update GET");
+  const [instance, allBooks] = await Promise.all([
+    BookInstance.findById(req.params.id).exec(),
+    Book.find().exec(),
+  ]);
+  if (!instance) {
+    return res.redirect('/catalog/bookinstances');
+  }
+  res.render('bookinstance_form', {
+    title: 'Редагувати екземпляр',
+    bookinstance: instance,
+    book_list: allBooks,
+  });
 });
 
 // Handle bookinstance update on POST.
-exports.bookinstance_update_post = asyncHandler(async (req, res, next) => {
-  res.send("NOT IMPLEMENTED: BookInstance update POST");
-});
+exports.bookinstance_update_post = [
+  // валідація/санітизація полів...
+  asyncHandler(async (req, res, next) => {
+    const inst = new BookInstance({
+      book: req.body.book,
+      imprint: req.body.imprint,
+      status: req.body.status,
+      due_back: req.body.due_back,
+      _id: req.params.id, // важливо для оновлення
+    });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const allBooks = await Book.find().exec();
+      return res.render('bookinstance_form', {
+        title: 'Редагувати екземпляр',
+        bookinstance: inst,
+        book_list: allBooks,
+        errors: errors.array(),
+      });
+    }
+    await BookInstance.findByIdAndUpdate(req.params.id, inst);
+    res.redirect(inst.url);
+  })
+];

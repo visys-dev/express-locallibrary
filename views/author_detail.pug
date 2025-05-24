@@ -11,6 +11,13 @@ block content
                 each book in author_books
                     dt
                         a(href=book.url)= book.title
-                    dd= book.summary
+                    //- Виводимо незашифрований HTML для summary, щоб кавички відображались коректно
+                    dd!= book.summary
         else
             p У цього автора немає книг.
+
+    hr
+
+    p
+        a.btn.btn-danger(href=author.url + '/delete', style='margin-top:15px;') Видалити автора
+        a.btn.btn-secondary(href=author.url + '/update', style='margin-top:15px;') Редагувати автора
