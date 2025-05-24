@@ -4,15 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4a5d17e6-488f-4a91-a9df-0bebbf7cc284" name="Changes" comment="Практична №13.1">
-      <change afterPath="$PROJECT_DIR$/views/genre_form.pug" afterDir="false" />
+    <list default="true" id="4a5d17e6-488f-4a91-a9df-0bebbf7cc284" name="Changes" comment="Практична №13 -- done">
+      <change afterPath="$PROJECT_DIR$/views/book_form.pug" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/bookinstance_detail.pug" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/bookinstance_form.pug" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/genreController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/genreController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/authorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/authorController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/bookController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bookController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/bookinstanceController.js" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/bookinstanceController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/author.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/author.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/book_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/book_detail.pug" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Pug File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,9 +33,9 @@
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2x5xKxj8CjkQCNQOFhQErS2YNOr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,6 +46,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "C:/Projects/js-practice-02/express-locallibrary",
     "node.js.detected.package.eslint": "true",
@@ -64,7 +78,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1747241675314</updated>
-      <workItem from="1747241676395" duration="2826000" />
+      <workItem from="1747241676395" duration="3425000" />
+      <workItem from="1748077205309" duration="4904000" />
     </task>
     <task id="LOCAL-00001" summary="Практична №12">
       <option name="closed" value="true" />
@@ -98,7 +113,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747243344432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Практична №13 -- done">
+      <option name="closed" value="true" />
+      <created>1747249607701</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747249607701</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -119,6 +142,7 @@
     <MESSAGE value="Практична №12" />
     <MESSAGE value="Практична №12.1" />
     <MESSAGE value="Практична №13.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Практична №13.1" />
+    <MESSAGE value="Практична №13 -- done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Практична №13 -- done" />
   </component>
 </project>

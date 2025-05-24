@@ -5,7 +5,7 @@ block content
 
     p #[strong Автор: ]
         a(href=book.author.url) #{book.author.name}
-    p #[strong Короткий опис:] #{book.summary}
+    p #[strong Короткий опис:] !{book.summary}
     p #[strong ISBN:] #{book.isbn}
     p #[strong Жанр: ]
         each val, index in book.genre

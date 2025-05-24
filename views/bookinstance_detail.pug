@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    h1= title
+
+    dl
+        dt Книга:
+        dd
+            a(href=bookinstance.book.url)= bookinstance.book.title
+
+        dt Відбиток:
+        dd= bookinstance.imprint
+
+        dt Статус:
+        dd= bookinstance.status
+
+        if bookinstance.due_back
+            dt Повернення:
+            dd= bookinstance.due_back.toISOString().substring(0, 10)
+
+        dt Ідентифікатор:
+        dd= bookinstance._id

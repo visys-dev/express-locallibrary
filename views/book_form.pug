@@ -1,0 +1,60 @@
+extends layout
+
+block content
+    h1= title
+
+    if errors
+        ul
+            each error in errors
+                li= error.msg
+
+    form(method='POST')
+        .form-group
+            label(for='title') Назва:
+            input#title.form-control(
+                type='text',
+                placeholder='Назва книги',
+                name='title',
+                required,
+                value= book ? book.title : ''
+            )
+        .form-group
+            label(for='author') Автор:
+            select#author.form-control(name='author' required)
+                option(value='') --Будь ласка, виберіть автора--
+                each author in authors
+                    if book && author._id.toString() === book.author._id.toString()
+                        option(value=author._id selected)= author.name
+                    else
+                        option(value=author._id)= author.name
+        .form-group
+            label(for='summary') Опис:
+            textarea#summary.form-control(
+                placeholder='Опис',
+                name='summary',
+                required
+            )!= book ? book.summary : ''
+        .form-group
+            label(for='isbn') ISBN:
+            input#isbn.form-control(
+                type='text',
+                placeholder='ISBN13',
+                name='isbn',
+                required,
+                value= book ? book.isbn : ''
+            )
+        .form-group
+            label Жанр:
+            div
+                each genre in genres
+                    .form-check.form-check-inline
+                        input.form-check-input(
+                            type='checkbox',
+                            name='genre',
+                            id=genre._id,
+                            value=genre._id,
+                            checked= genre.checked
+                        )
+                        label.form-check-label(for=genre._id)= genre.name
+
+        button.btn.btn-primary(type='submit') Зберегти

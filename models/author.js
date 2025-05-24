@@ -36,7 +36,7 @@ AuthorSchema.virtual("lifespan").get(function () {
   const birth = this.date_of_birth_formatted || "";
   const death = this.date_of_death_formatted || "";
   return `${birth} – ${death}`;
-});
+});+
 
 // Віртуальне поле для URL автора
 AuthorSchema.virtual("url").get(function () {

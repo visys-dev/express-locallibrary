@@ -50,14 +50,14 @@ exports.author_create_post = [
       .isLength({ min: 1 })
       .escape()
       .withMessage("Ім'я повинно бути вказано.")
-      .isAlphanumeric()
+      .isAlphanumeric("uk-UA")
       .withMessage("Ім'я містить неалфанумерні символи."),
   body("family_name")
       .trim()
       .isLength({ min: 1 })
       .escape()
       .withMessage("Прізвище повинно бути вказано.")
-      .isAlphanumeric()
+      .isAlphanumeric("uk-UA")
       .withMessage("Прізвище містить неалфанумерні символи."),
   body("date_of_birth", "Недійсна дата народження")
       .optional({ values: "falsy" })
