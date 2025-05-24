@@ -11,7 +11,7 @@ block content
                 each book in genre_books
                     dt
                         a(href=book.url) #{book.title}
-                    dd #{book.summary}
+                    dd !{book.summary}
         else
             p У цього жанру немає книг.
 

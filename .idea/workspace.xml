@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4a5d17e6-488f-4a91-a9df-0bebbf7cc284" name="Changes" comment="Vercel update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/vercel.json" beforeDir="false" afterPath="$PROJECT_DIR$/vercel.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/genre_detail.pug" beforeDir="false" afterPath="$PROJECT_DIR$/views/genre_detail.pug" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +87,7 @@
       <updated>1747241675314</updated>
       <workItem from="1747241676395" duration="3425000" />
       <workItem from="1748077205309" duration="15083000" />
-      <workItem from="1748118208664" duration="2415000" />
+      <workItem from="1748118208664" duration="2965000" />
     </task>
     <task id="LOCAL-00001" summary="Практична №12">
       <option name="closed" value="true" />
@@ -170,7 +169,31 @@
       <option name="project" value="LOCAL" />
       <updated>1748119608030</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Vercel update">
+      <option name="closed" value="true" />
+      <created>1748120669667</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1748120669667</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Vercel update">
+      <option name="closed" value="true" />
+      <created>1748120750479</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748120750479</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Vercel update">
+      <option name="closed" value="true" />
+      <created>1748120982498</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748120982498</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

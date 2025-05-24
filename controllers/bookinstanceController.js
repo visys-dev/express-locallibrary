@@ -14,7 +14,7 @@ exports.bookinstance_list = asyncHandler(async (req, res, next) => {
 });
 
 exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
-  // Шукаємо екземпляр за id та підвантажуємо пов’язану книгу
+  // Шукаємо екземпляр за id та підвантажуємо пов'язану книгу
   const bookinstance = await BookInstance.findById(req.params.id)
       .populate("book")
       .exec();
@@ -25,7 +25,7 @@ exports.bookinstance_detail = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  // Рендеримо шаблон із передачею знайденого об’єкта
+  // Рендеримо шаблон із передачею знайденого об'єкта
   res.render("bookinstance_detail", {
     title: "Інформація про екземпляр",
     bookinstance,
@@ -47,11 +47,11 @@ exports.bookinstance_create_get = asyncHandler(async (req, res, next) => {
 
 exports.bookinstance_create_post = [
   // 1) Валідація та очищення полів
-  body("book", "Книга обов’язкова.")
+  body("book", "Книга обов'язкова.")
       .trim()
       .isLength({ min: 1 })
       .escape(),
-  body("imprint", "Видавництво обов’язкове.")
+  body("imprint", "Видавництво обов'язкове.")
       .trim()
       .isLength({ min: 1 })
       .escape(),
@@ -68,7 +68,7 @@ exports.bookinstance_create_post = [
     // Отримуємо результати валідації
     const errors = validationResult(req);
 
-    // Створюємо об’єкт BookInstance на основі req.body
+    // Створюємо об'єкт BookInstance на основі req.body
     const bookInstance = new BookInstance({
       book: req.body.book,
       imprint: req.body.imprint,
@@ -110,8 +110,13 @@ exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
 
 // POST /catalog/bookinstance/:id/delete
 exports.bookinstance_delete_post = asyncHandler(async (req, res, next) => {
+  const instance = await BookInstance.findById(req.body.instanceid).populate('book');
+  if (!instance) {
+    return res.redirect('/catalog/bookinstances');
+  }
+  const bookUrl = instance.book.url;
   await BookInstance.findByIdAndDelete(req.body.instanceid);
-  res.redirect('/catalog/bookinstances');
+  res.redirect(bookUrl);
 });
 
 // Display BookInstance update form on GET.
