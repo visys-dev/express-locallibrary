@@ -22,6 +22,9 @@ const queriesRouter = require('./routes/queries');
 
 const app = express();
 
+// Налаштування trust proxy для Vercel
+app.set('trust proxy', 1);
+
 // Стиснення відповіді
 app.use(compression());
 
