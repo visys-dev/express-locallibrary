@@ -9,10 +9,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-// Підключення до MongoDB
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log('✔️ MongoDB connected successfully'))
-    .catch(err => console.error('❌ MongoDB connection error:', err));
+// // Підключення до MongoDB
+// mongoose.connect(process.env.MONGO_URI)
+//     .then(() => console.log('✔️ MongoDB connected successfully'))
+//     .catch(err => console.error('❌ MongoDB connection error:', err));
 
 // Імпортуємо роутери
 const indexRouter = require('./routes/index');

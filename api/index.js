@@ -1,23 +1,22 @@
-// /api/index.js
+// ./api/index.js
 const mongoose = require('mongoose');
-const app = require('../app');      // ваш Express app
+const app = require('../app');
 
 module.exports = async (req, res) => {
-    // Лог для перевірки, що змінна підхопилася
+    // перевіряємо, що ENV підхопився
     console.log('🔑 MONGO_URI:', process.env.MONGO_URI);
 
-    // Якщо ще не підключилися — підключаємося
+    // якщо ще не підключені — підключаємося
     if (mongoose.connection.readyState !== 1) {
         try {
             await mongoose.connect(process.env.MONGO_URI);
             console.log('✔️ MongoDB connected (runtime)');
         } catch (err) {
             console.error('❌ MongoDB connection error (runtime):', err);
-            res.status(500).send('DB connection failed');
-            return;
+            return res.status(500).send('Database connection failed');
         }
     }
 
-    // Далі передаємо обробку Express
+    // далі передаємо всі запити в Express
     return app(req, res);
 };
